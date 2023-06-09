@@ -124,8 +124,7 @@ RSpec.describe "merchant dashboard" do
     within "#coupon_link" do
       expect(page).to have_link("My Coupons")
       
-      click_link "My Coupons"
-
+      click_link("My Coupons")
       expect(current_path).to eq(merchant_coupons_path(@merchant1))
     end
   end
