@@ -50,5 +50,17 @@ RSpec.describe "New Coupon Form", type: :feature do
       expect(current_path).to eq(new_merchant_coupon_path(@merch))
       expect(page).to have_content("Limit 5 active coupons. Please deactivate one before creating another")
     end
+
+    it "won't create coupon if the code is not unique" do
+      @coupon1 = @merch.coupons.create!(name: "$10 off", code: "OFF10", value: 10.00, value_type: 1, activated: true)
+
+      within "#new_coupon_form" do
+        fill_in "Name", with: "10% off"
+        fill_in "Code", with: "OFF10"
+        fill_in "Value", with: 0.10
+        select "percent", from: "Value type"
+        click_button("Create Coupon")
+      end
+    end
   end
 end

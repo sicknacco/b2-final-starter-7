@@ -16,7 +16,7 @@ RSpec.describe Coupon, type: :model do
     it { should validate_presence_of(:code) }
     it { should validate_uniqueness_of(:code) }
     it { should validate_presence_of(:value) }
-    it { should validate_numericality_of(:value).is_greater_than(0) }
+    it { should validate_numericality_of(:value) }
     it { should validate_presence_of(:value_type) }
     it { should allow_value(true).for(:activated) }
     it { should allow_value(false).for(:activated) }

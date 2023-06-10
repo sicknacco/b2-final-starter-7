@@ -1,4 +1,4 @@
-class Merchants::CouponsController < ApplicationController
+class CouponsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
   end
@@ -9,6 +9,8 @@ class Merchants::CouponsController < ApplicationController
 
   def new
     @merchant = Merchant.find(params[:merchant_id])
+    # require 'pry'; binding.pry
+    @coupon = Coupon.new
   end
   
   def create
@@ -29,6 +31,6 @@ class Merchants::CouponsController < ApplicationController
   private
 
   def coupon_params
-    params.require(:merchant).permit(:name, :code, :value, :value_type, :merchant_id)
+    params.require(:coupon).permit(:name, :code, :value, :value_type, :merchant_id)
   end
 end
