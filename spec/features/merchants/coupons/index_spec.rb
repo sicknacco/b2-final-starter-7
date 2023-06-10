@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Merchant's coupons index page", type: :feature do
   before(:each) do
     @merch = Merchant.create!(name: "Jim Bob's")
-    @coupon1 = @merch.coupons.create!(name: "$10 off", code: "OFF10", value: 10.00, activated: false)
-    @coupon2 = @merch.coupons.create!(name: "10% off", code: "TAKE10PER", value: 0.10, activated: false)
+    @coupon1 = @merch.coupons.create!(name: "$10 off", code: "OFF10", value: 10.00, value_type: 1, activated: false)
+    @coupon2 = @merch.coupons.create!(name: "10% off", code: "TAKE10PER", value: 0.10, value_type: 0, activated: false)
   end
 
   describe "When visiting a merchant's coupon index page" do
