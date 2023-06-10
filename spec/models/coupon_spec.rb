@@ -22,4 +22,12 @@ RSpec.describe Coupon, type: :model do
     it { should allow_value(false).for(:activated) }
     it { should_not allow_value(nil).for(:activated) }
   end
+
+  describe "Instance Methods" do
+    describe "#times_used" do
+      it "shows number of times a coupon has been used on successful transactions" do
+        
+      end
+    end
+  end
 end

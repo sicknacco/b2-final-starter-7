@@ -9,7 +9,6 @@ class CouponsController < ApplicationController
 
   def new
     @merchant = Merchant.find(params[:merchant_id])
-    # require 'pry'; binding.pry
     @coupon = Coupon.new
   end
   
