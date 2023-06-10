@@ -13,6 +13,8 @@
     <%= form.label :value_type %>
     <%= form.select :value_type, ["percent", "dollar"] %>
 
+    <%= form.hidden_field :merchant_id, value: @merchant.id %>
+
     <%= form.submit "Create Coupon" %>
   <% end %>
 </section>

@@ -12,9 +12,8 @@ class Merchants::CouponsController < ApplicationController
   end
   
   def create
-    merchant = Merchant.find(params[:merchant_id])
-    # require 'pry'; binding.pry
-    @coupon = merchant.coupons.new(coupon_params)
+    @merchant = Merchant.find(params[:merchant_id])
+    @coupon = @merchant.coupons.new(coupon_params)
     if @merchant.coupons.count >= 5
       flash[:alert] = "Limit 5 active coupons. Please deactivate one before creating another"
       redirect_to new_merchant_coupon_path(@merchant)
@@ -30,6 +29,6 @@ class Merchants::CouponsController < ApplicationController
   private
 
   def coupon_params
-    params.require(:coupon).permit(:name, :code, :value, :value_type)
+    params.require(:merchant).permit(:name, :code, :value, :value_type, :merchant_id)
   end
 end
