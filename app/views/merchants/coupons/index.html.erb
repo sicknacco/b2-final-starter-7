@@ -1,0 +1,10 @@
+
+
+<section class="coupons">
+  <% @merchant.coupons.each do |coupon| %>
+    <div id="coupon_<%= coupon.id %>">
+      <p>Coupon Name: <%= link_to coupon.name, merchant_coupon_path(@merchant, coupon) %></p>
+      <p>Coupon Amount Off: <%= coupon.value %></p>
+    </div>
+  <% end %>
+</section>
