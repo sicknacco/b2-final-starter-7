@@ -4,7 +4,7 @@ RSpec.describe "Merchant's coupons index page", type: :feature do
   before(:each) do
     @merch = Merchant.create!(name: "Jim Bob's")
     @coupon1 = @merch.coupons.create!(name: "$10 off", code: "OFF10", value: 10.00, activated: false)
-    @coupon1 = @merch.coupons.create!(name: "10% off", code: "TAKE10PER", value: 10.00, activated: false)
+    @coupon1 = @merch.coupons.create!(name: "10% off", code: "TAKE10PER", value: .10, activated: false)
   end
 
   describe "When visiting a merchant's coupon index page" do
@@ -36,7 +36,8 @@ RSpec.describe "Merchant's coupons index page", type: :feature do
           expect(page).to have_link(@coupon1.name)
 
           click_link(@coupon1.name)
-          expect(current_path).to eq(merchant_coupon_path(@merc, @coupon1))
+          expect(current_path).to eq(merchant_coupon_path(@merch, @coupon1))
+          expect(page).to have_content(@coupon1.name)
         end
       end
     end
