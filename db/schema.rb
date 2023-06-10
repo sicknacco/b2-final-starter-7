@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_10_170407) do
     t.boolean "activated", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "value_type"
+    t.integer "value_type"
     t.index ["merchant_id"], name: "index_coupons_on_merchant_id"
   end
 
