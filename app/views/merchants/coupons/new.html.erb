@@ -1,6 +1,6 @@
 <h1>Create New Coupon</h1>
 <section id="new_coupon_form">
-  <%= form_with model: [@merchant], url: merchant_coupons_path(@merchant), local: true do |form| %>
+  <%= form_with model: [@merchant], url: merchant_coupons_path(@merchant), method: :post, local: true do |form| %>
     <%= form.label :name %>
     <%= form.text_field :name %>
 
