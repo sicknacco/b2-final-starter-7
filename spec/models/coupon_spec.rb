@@ -9,6 +9,7 @@ RSpec.describe Coupon, type: :model do
   describe "relationships" do
     it { should belong_to :merchant }
     it { should have_many(:invoices) }
+    it { should have_many(:transactions).through(:invoices) }
   end
 
   describe "validations" do
@@ -26,7 +27,9 @@ RSpec.describe Coupon, type: :model do
   describe "Instance Methods" do
     describe "#times_used" do
       it "shows number of times a coupon has been used on successful transactions" do
-        
+        test_data
+        expect(@coupon1.times_used).to eq(2)
+        expect(@coupon2.times_used).to eq(1)
       end
     end
   end

@@ -19,17 +19,19 @@ def test_data
   @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2)
   @invoice_3 = Invoice.create!(customer_id: @customer_2.id, status: 2, coupon_id: @coupon2.id)
   @invoice_4 = Invoice.create!(customer_id: @customer_2.id, status: 2, coupon_id: @coupon1.id)
+  @invoice_5 = Invoice.create!(customer_id: @customer_2.id, status: 2, coupon_id: @coupon1.id)
 
   @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 100, status: 2)
   @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 100, status: 2)
   @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_2.id, quantity: 2, unit_price: 100, status: 2)
   @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_3.id, quantity: 3, unit_price: 100, status: 2)
-  @ii_5 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 3, unit_price: 100, status: 2)
+  @ii_5 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 3, unit_price: 100, status: 2)
 
   @transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
   @transaction2 = Transaction.create!(credit_card_number: 230948, result: 1, invoice_id: @invoice_2.id)
   @transaction3 = Transaction.create!(credit_card_number: 234092, result: 1, invoice_id: @invoice_3.id)
   @transaction4 = Transaction.create!(credit_card_number: 850348, result: 1, invoice_id: @invoice_4.id)
+  @transaction5 = Transaction.create!(credit_card_number: 850348, result: 0, invoice_id: @invoice_5.id)
 end
 
 require "simplecov"
