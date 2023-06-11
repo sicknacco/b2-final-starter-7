@@ -182,5 +182,11 @@ describe Merchant do
       expect(@merchant1.activated_coupons).to eq([@coupon1, @coupon4])
       expect(@merchant2.activated_coupons).to eq([@coupon2])
     end
+
+    it "deactivated_coupons" do
+      test_data
+      expect(@merchant1.deactivated_coupons).to eq([@coupon3])
+      expect(@merchant2.deactivated_coupons).to eq([@coupon5, @coupon6])
+    end
   end
 end
