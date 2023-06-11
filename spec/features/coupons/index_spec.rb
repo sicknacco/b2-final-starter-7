@@ -49,21 +49,44 @@ RSpec.describe "Merchant's coupons index page", type: :feature do
       describe "merchant coupon index page has link to create a new coupon" do
         it "can click a link that leads to the new coupon form" do
           visit(merchant_coupons_path(@merch))
-
+          
           within "#new_coupon" do
             expect(page).to have_link("Create New Coupon")
-
+            
             click_link("Create New Coupon")
-
+            
             expect(current_path).to eq(new_merchant_coupon_path(@merch))
           end
         end
       end
     end
-
+    
     describe "Merchant Coupon Index Sorted" do
       it "displays all merchant coupons separated by activated status" do
-        
+        test_data
+        visit(merchant_coupons_path(@merchant1))
+
+        within "#activated_coupons" do
+          expect(page).to have_link(@coupon1.name)
+          expect(page).to have_content("Coupon Name: #{@coupon1.name}")
+          expect(page).to have_content("Coupon Amount Off: #{@coupon1.value}")
+          expect(page).to have_content("Coupon Type: #{@coupon1.value_type}")
+          expect(page).to_not have_link(@coupon3.name)
+          expect(page).to_not have_content("Coupon Amount Off: #{@coupon3.value}")
+          expect(page).to_not have_content("Coupon Name: #{@coupon3.name}")
+
+          expect(page).to have_content("Coupon Name: #{@coupon4.name}")
+        end
+
+        within "#deactivated_coupons" do
+          expect(page).to have_link(@coupon3.name)
+          expect(page).to have_content("Coupon Name: #{@coupon3.name}")
+          expect(page).to have_content("Coupon Amount Off: #{@coupon3.value}")
+          expect(page).to have_content("Coupon Type: #{@coupon3.value_type}")
+          expect(page).to_not have_link(@coupon1.name)
+          expect(page).to_not have_content("Coupon Amount Off: #{@coupon1.value}")
+          expect(page).to_not have_content("Coupon Name: #{@coupon1.name}")
+        end
       end
     end
   end
