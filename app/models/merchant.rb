@@ -70,4 +70,8 @@ class Merchant < ApplicationRecord
   def activated_coupons
     coupons.where(activated: true)
   end
+
+  def deactivated_coupons
+    coupons.where(activated: false)
+  end
 end
