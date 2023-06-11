@@ -3,8 +3,12 @@ def test_data
   @merchant2 = Merchant.create!(name: "Jewelry")
 
   @coupon1 = @merchant1.coupons.create!(name: "Test $10", code: "TEST10", value: 10.00, value_type: 1, activated: true)
+  @coupon3 = @merchant1.coupons.create!(name: "Test $20", code: "20TEST", value: 20.00, value_type: 1, activated: false)
+  @coupon4 = @merchant1.coupons.create!(name: "Test Percent", code: "PERCENT", value: 0.20, value_type: 0, activated: true)
+
   @coupon2 = @merchant2.coupons.create!(name: "Test 10%", code: "10TEST", value: 0.10, value_type: 0, activated: true)
-  @coupon3 = @merchant1.coupons.create!(name: "Test $10", code: "20TEST", value: 20.00, value_type: 1, activated: false)
+  @coupon5 = @merchant2.coupons.create!(name: "$20 Now", code: "NOW20", value: 20.00, value_type: 1, activated: false)
+  @coupon6 = @merchant2.coupons.create!(name: "Golden Ticket", code: "GOLDEN", value: 50.00, value_type: 1, activated: false)
 
   @item_1 = @merchant1.items.create!(name: "Shampoo", description: "This washes your hair", unit_price: 100)
   @item_2 = @merchant1.items.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 100)

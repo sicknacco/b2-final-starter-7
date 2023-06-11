@@ -66,4 +66,12 @@ class Merchant < ApplicationRecord
   def five_active_coupons?
     coupons.where(activated: true).count >= 5
   end
+
+  def activated_coupons
+    coupons.where(activated: true)
+  end
+
+  def deactivated_coupons
+    coupons.where(activated: false)
+  end
 end
