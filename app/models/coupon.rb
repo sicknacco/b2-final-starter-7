@@ -12,8 +12,9 @@ class Coupon < ApplicationRecord
   enum value_type: {"percent": 0, "dollar": 1}
 
   def times_used
-    Coupon.joins(:transactions)
-        .where(transactions: { result: 1 })
-        .count
+    # require 'pry'; binding.pry
+    Coupon.joins(invoices: :transactions)
+          .where(transactions: { result: 1 })
+          .count
   end
 end

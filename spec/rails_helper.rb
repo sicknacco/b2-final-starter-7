@@ -19,7 +19,7 @@ def test_data
   @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2)
   @invoice_3 = Invoice.create!(customer_id: @customer_2.id, status: 2, coupon_id: @coupon2.id)
   @invoice_4 = Invoice.create!(customer_id: @customer_2.id, status: 2, coupon_id: @coupon1.id)
-  @invoice_5 = Invoice.create!(customer_id: @customer_2.id, status: 2, coupon_id: @coupon1.id)
+  @invoice_5 = Invoice.create!(customer_id: @customer_2.id, status: 1, coupon_id: @coupon1.id)
 
   @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 100, status: 2)
   @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 100, status: 2)
