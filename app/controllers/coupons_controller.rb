@@ -4,6 +4,7 @@ class CouponsController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @coupon = Coupon.find(params[:id])
   end
 
@@ -30,13 +31,24 @@ class CouponsController < ApplicationController
     else
       redirect_to new_merchant_coupon_path(@merchant)
       flash[:notice] = "Please complete all fields"
+    end
+  end
 
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @coupon = Coupon.find(params[:id])
+
+    if @merchant.five_active_coupons?
+      flash[:alert] = "Limit 5 active coupons. Please deactivate one before creating another"
+    else
+      @coupon.update(activated: false)
+      redirect_to merchant_coupon_path(@merchant, @coupon)
     end
   end
 
   private
 
   def coupon_params
-    params.require(:coupon).permit(:name, :code, :value, :value_type, :merchant_id)
+    params.require(:coupon).permit(:name, :code, :value, :value_type, :merchant_id, :activated)
   end
 end
