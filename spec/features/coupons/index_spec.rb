@@ -67,6 +67,7 @@ RSpec.describe "Merchant's coupons index page", type: :feature do
         visit(merchant_coupons_path(@merchant1))
 
         within "#activated_coupons" do
+          expect(page).to have_content("Activated Coupons")
           expect(page).to have_link(@coupon1.name)
           expect(page).to have_content("Coupon Name: #{@coupon1.name}")
           expect(page).to have_content("Coupon Amount Off: #{@coupon1.value}")
@@ -74,11 +75,12 @@ RSpec.describe "Merchant's coupons index page", type: :feature do
           expect(page).to_not have_link(@coupon3.name)
           expect(page).to_not have_content("Coupon Amount Off: #{@coupon3.value}")
           expect(page).to_not have_content("Coupon Name: #{@coupon3.name}")
-
+          
           expect(page).to have_content("Coupon Name: #{@coupon4.name}")
         end
-
+        
         within "#deactivated_coupons" do
+          expect(page).to have_content("Deactivated Coupons")
           expect(page).to have_link(@coupon3.name)
           expect(page).to have_content("Coupon Name: #{@coupon3.name}")
           expect(page).to have_content("Coupon Amount Off: #{@coupon3.value}")
