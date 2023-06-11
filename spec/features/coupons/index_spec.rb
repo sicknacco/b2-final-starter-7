@@ -60,5 +60,11 @@ RSpec.describe "Merchant's coupons index page", type: :feature do
         end
       end
     end
+
+    describe "Merchant Coupon Index Sorted" do
+      it "displays all merchant coupons separated by activated status" do
+        
+      end
+    end
   end
 end
