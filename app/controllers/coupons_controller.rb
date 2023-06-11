@@ -15,7 +15,7 @@ class CouponsController < ApplicationController
   def create
     @merchant = Merchant.find(params[:merchant_id])
     @coupon = @merchant.coupons.new(coupon_params)
-    if @merchant.coupons.count >= 5
+    if @merchant.five_active_coupons?
       flash[:alert] = "Limit 5 active coupons. Please deactivate one before creating another"
       redirect_to new_merchant_coupon_path(@merchant)
     elsif 
