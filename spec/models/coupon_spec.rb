@@ -28,7 +28,6 @@ RSpec.describe Coupon, type: :model do
     describe "#times_used" do
       it "shows number of times a coupon has been used on successful transactions" do
         test_data
-        # require 'pry'; binding.pry
         expect(@coupon1.times_used).to eq(2)
         expect(@coupon2.times_used).to eq(1)
       end
