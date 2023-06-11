@@ -57,4 +57,19 @@ RSpec.describe "Coupon's Show Page", type: :feature do
       expect(page).to have_content("Coupon Activated?: false")
     end
   end
+
+  describe "Activate coupon button" do
+    it "has a button to activate a coupon" do
+      test_data
+      visit(merchant_coupon_path(@merchant1, @coupon3))
+
+      expect(page).to have_content("Coupon Activated?: false")
+      expect(page).to have_button("Activate #{@coupon3.name}")
+
+      click_button("Activate #{@coupon3.name}")
+
+      expect(current_path).to eq(merchant_coupon_path(@merchant1, @coupon3))
+      expect(page).to have_content("Coupon Activated?: true")
+    end
+  end
 end
