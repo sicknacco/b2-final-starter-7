@@ -41,7 +41,6 @@ RSpec.describe "Coupon's Show Page", type: :feature do
       expect(page).to have_content("Value: #{@coupon2.value}")
       expect(page).to have_content("Value Type: #{@coupon2.value_type}")
       expect(page).to have_content("Coupon Activated?: #{@coupon2.activated}")
-      save_and_open_page
       expect(page).to have_content("Times Used: #{@coupon2.times_used}")
     end
   end
