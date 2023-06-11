@@ -39,7 +39,7 @@ RSpec.describe "New Coupon Form", type: :feature do
       @coupon3 = @merch.coupons.create!(name: "Summer Sale", code: "SUMMER", value: 0.25, value_type: 0, activated: true)
       @coupon4 = @merch.coupons.create!(name: "Spring Sale", code: "SPRING", value: 25.00, value_type: 1, activated: true)
       @coupon5 = @merch.coupons.create!(name: "Number 5", code: "NUM5", value: 5.00, value_type: 1, activated: true)
-
+      
       within "#new_coupon_form" do
         fill_in "Name", with: "Winter $20"
         fill_in "Code", with: "WIN20"
@@ -50,8 +50,8 @@ RSpec.describe "New Coupon Form", type: :feature do
       expect(current_path).to eq(new_merchant_coupon_path(@merch))
       expect(page).to have_content("Limit 5 active coupons. Please deactivate one before creating another")
     end
-
-    xit "won't create coupon if the code is not unique" do
+    
+    it "won't create coupon if the code is not unique" do      
       @coupon1 = @merch.coupons.create!(name: "$10 off", code: "OFF10", value: 10.00, value_type: 1, activated: true)
 
       within "#new_coupon_form" do
@@ -63,6 +63,18 @@ RSpec.describe "New Coupon Form", type: :feature do
       end
       expect(current_path).to eq(new_merchant_coupon_path(@merch))
       expect(page).to have_content("That code is already taken, sorry!")
+    end
+    
+    it "will re-render the new coupon form if not fully completed" do
+      within "#new_coupon_form" do
+        fill_in "Name", with: ""
+        fill_in "Code", with: "50OFF"
+        fill_in "Value", with: 50.00
+        select "dollar", from: "Value type"
+        click_button("Create Coupon")
+      end
+      expect(current_path).to eq(new_merchant_coupon_path(@merch))
+      expect(page).to have_content("Please complete all fields")
     end
   end
 end

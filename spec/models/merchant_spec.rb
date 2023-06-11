@@ -170,5 +170,11 @@ describe Merchant do
       expect(@merchant1.disabled_items).to eq([@item_2, @item_3, @item_4, @item_7, @item_8])
       expect(@merchant2.disabled_items).to eq([@item_5, @item_6])
     end
+
+    it "five_active_coupons?" do
+      test_data
+      expect(@merchant1.five_active_coupons?).to eq(false)
+      expect(@merchant2.five_active_coupons?).to eq(false)
+    end
   end
 end

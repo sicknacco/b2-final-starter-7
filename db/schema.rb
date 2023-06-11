@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_10_170407) do
     t.string "code"
     t.decimal "value"
     t.bigint "merchant_id", null: false
-    t.boolean "activated", default: false
+    t.boolean "activated", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "value_type"
