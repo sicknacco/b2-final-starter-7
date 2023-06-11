@@ -6,4 +6,8 @@
 <p>Coupon Activated?: <%= @coupon.activated %></p>
 <p>Times Used: <%= @coupon.times_used %></p>
 
-<%= button_to "Deactivate #{@coupon.name}", merchant_coupon_path(@merchant, @coupon), method: :patch, params: {activated: false} %>
+<% if @coupon.activated == true %>
+  <%= button_to "Deactivate #{@coupon.name}", merchant_coupon_path(@merchant, @coupon), method: :patch, params: {activated: false} %>
+<% else %>
+  <%= button_to "Activate #{@coupon.name}", merchant_coupon_path(@merchant, @coupon), method: :patch, params: {activated: true} %>
+<% end %>
