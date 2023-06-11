@@ -33,8 +33,9 @@ RSpec.describe "Coupon's Show Page", type: :feature do
 
   describe "Coupon show page details" do
     it "shows coupon name, code, value, status, and number of times it's been used" do
+      test_data
       visit(merchant_coupon_path(@merch, @coupon2))
-
+      
       expect(page).to have_content("#{@coupon2.name} Show Page")
       expect(page).to have_content("Code: #{@coupon2.code}")
       expect(page).to have_content("Value: #{@coupon2.value}")
