@@ -5,3 +5,5 @@
 <p>Value Type: <%= @coupon.value_type %></p>
 <p>Coupon Activated?: <%= @coupon.activated %></p>
 <p>Times Used: <%= @coupon.times_used %></p>
+
+<%= button_to "Deactivate #{@coupon.name}", merchant_coupon_path(@merchant, @coupon), method: :patch, params: {activated: false} %>
