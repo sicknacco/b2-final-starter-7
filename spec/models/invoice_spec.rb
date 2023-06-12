@@ -27,10 +27,10 @@ RSpec.describe Invoice, type: :model do
 
     it ".coupon_discount" do
       test_data
-      expected1 = 10
-      subtotal1 = 900
-      expected2 = 20
-      subtotal2 = 200
+      expected1 = 10 # < invoice_1 discount
+      subtotal1 = 900 # <invoice_1 subtotal
+      expected2 = 20 # <invoice_3 discount 10% or 0.10
+      subtotal2 = 200 # <invoice_3 subtotal
       expect(@invoice_1.coupon_discount(subtotal1)).to eq(expected1)
       expect(@invoice_3.coupon_discount(subtotal2)).to eq(expected2)
     end
