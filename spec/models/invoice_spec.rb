@@ -25,7 +25,15 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice_1.total_revenue).to eq(100)
     end
 
-    it "rev_with_discount" do
+    it ".coupon_discount" do
+      test_data
+      expected1 = 10
+      expected2 = 20
+      expect(@invoice_1.coupon_discount).to eq(expected1)
+      expect(@invoice_3.coupon_discount).to eq(expected2)
+    end
+
+    it ".rev_with_discount" do
       test_data
       expect(@invoice_1.rev_with_discount).to eq(890)
       expect(@invoice_3.rev_with_discount).to eq(180)
