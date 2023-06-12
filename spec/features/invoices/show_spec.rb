@@ -124,8 +124,11 @@ RSpec.describe "invoices show" do
       expect(page).to have_content("Coupon Used:")
       expect(page).to have_content("Name:")
       expect(page).to have_content("Coupon Code:")
-      expect(page).to have_link(@coupon1.name)
       expect(page).to have_content(@coupon1.code)
+      expect(page).to have_link(@coupon1.name)
+
+      click_link(@coupon1.name)
+      expect(current_path).to eq(merchant_coupon_path(@merchant1, @coupon1))
     end
   end
 end
