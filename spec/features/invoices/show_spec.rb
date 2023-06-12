@@ -103,13 +103,29 @@ RSpec.describe "invoices show" do
 # US 7
   it "displays the total revenue without coupon discount" do
     visit(merchant_invoice_path(@merchant1, @invoice_1))
-    expect(page).to have_content("Subtotal:")
-    expect(page).to have_content(@invoice_1.total_revenue)
+    within "#coupon_area" do
+      expect(page).to have_content("Subtotal:")
+      expect(page).to have_content(@invoice_1.total_revenue)
+    end
   end
   
   it "displays the 'grand total' with coupon discount" do
     visit(merchant_invoice_path(@merchant1, @invoice_1))
-    expect(page).to have_content("Grand Total:")
-    expect(page).to have_content(@invoice_1.rev_with_discount)
+    within "#coupon_area" do
+      expect(page).to have_content("Grand Total:")
+      expect(page).to have_content(@invoice_1.rev_with_discount)
+    end
+  end
+  
+  it "displays the name and code of coupon used as link to show page" do
+    test_data
+    visit(merchant_invoice_path(@merchant1, @invoice_1))
+    within "#coupon_area" do
+      expect(page).to have_content("Coupon Used:")
+      expect(page).to have_content("Name:")
+      expect(page).to have_content("Coupon Code:")
+      expect(page).to have_link(@coupon1.name)
+      expect(page).to have_content(@coupon1.code)
+    end
   end
 end
