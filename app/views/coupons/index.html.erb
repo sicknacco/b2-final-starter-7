@@ -1,9 +1,3 @@
-<section id="holidays">
-    <h3>Next 3 Holidays</h3>
-    <% @holidays.each do |holiday| %>
-      <p><%= holiday.name %> - <%= holiday.date %></p>
-    <% end %>
-  </section>
 
 <section id="new_coupon">
   <%= link_to "Create New Coupon", new_merchant_coupon_path(@merchant) %>
