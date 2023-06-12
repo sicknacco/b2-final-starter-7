@@ -69,4 +69,37 @@ describe "Admin Invoices Index Page" do
       expect(@i1.status).to eq("completed")
     end
   end
+
+  #US 8
+  it "displays name and code of coupon if a coupon was used" do
+    test_data
+    visit(admin_invoice_path(@invoice_1))
+    
+    within "#coupon_area" do
+      expect(page).to have_content("Coupon Used:")
+      expect(page).to have_content(@coupon1.name)
+      expect(page).to have_content(@coupon1.code)
+    end
+  end
+  
+  it "does not display coupon information if no coupon was used" do
+    test_data
+    visit(admin_invoice_path(@invoice_2))
+    expect(page).to have_content("Total Revenue: $#{@invoice_2.total_revenue}")
+    expect(page).to_not have_content("Coupon Used:")
+    expect(page).to_not have_content(@coupon1.name)
+    expect(page).to_not have_content(@coupon1.code)
+  end
+  
+  it "displays invoice subtotal and invoice grand total after coupon discount" do
+    test_data
+    visit(admin_invoice_path(@invoice_1))
+    
+    within "#coupon_area" do
+      expect(page).to have_content("Subtotal: $#{@invoice_1.total_revenue}")
+      expect(page).to have_content("Grand Total: $#{@invoice_1.rev_with_discount}")
+      expect(page).to have_content("$900.00")
+      expect(page).to have_content("$890.00")
+    end
+  end
 end
