@@ -75,31 +75,29 @@ describe "Admin Invoices Index Page" do
     test_data
     visit(admin_invoice_path(@invoice_1))
     
-    within "#coupon_info" do
+    within "#coupon_area" do
       expect(page).to have_content("Coupon Used:")
       expect(page).to have_content(@coupon1.name)
       expect(page).to have_content(@coupon1.code)
     end
   end
   
-  xit "does not display coupon information if no coupon was used" do
+  it "does not display coupon information if no coupon was used" do
     test_data
     visit(admin_invoice_path(@invoice_2))
     
-    within "#coupon_info" do
-      expect(page).to_not have_content("Coupon Used:")
-      expect(page).to_not have_content(@coupon1.name)
-      expect(page).to_not have_content(@coupon1.code)
-    end
+    expect(page).to_not have_content("Coupon Used:")
+    expect(page).to_not have_content(@coupon1.name)
+    expect(page).to_not have_content(@coupon1.code)
   end
   
-  xit "displays invoice subtotal and invoice grand total after coupon discount" do
+  it "displays invoice subtotal and invoice grand total after coupon discount" do
     test_data
     visit(admin_invoice_path(@invoice_1))
     
-    within "#coupon_info" do
-      expect(page).to have_content("Subtotal Revenue: #{number_to_currency(invoice.total_revenue)}")
-      expect(page).to have_content("Grand Total Revenue: #{number_to_currency(invoice.rev_with_discount)}")
+    within "#coupon_area" do
+      expect(page).to have_content("Subtotal: #{@invoice_1.total_revenue}")
+      expect(page).to have_content("Grand Total: #{@invoice_1.rev_with_discount}")
       expect(page).to have_content("$900.00")
       expect(page).to have_content("$890.00")
     end
