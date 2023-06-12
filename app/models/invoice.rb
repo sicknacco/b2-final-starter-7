@@ -16,6 +16,10 @@ class Invoice < ApplicationRecord
   end
 
   def rev_with_discount
-    
+    subtotal = total_revenue
+    if coupon.present?
+      discount = coupon_discount(subtotal)
+      subtotal - discount
+    end
   end
 end
