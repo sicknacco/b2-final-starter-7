@@ -98,9 +98,10 @@ describe "Admin Invoices Index Page" do
     visit(admin_invoice_path(@invoice_1))
     
     within "#coupon_info" do
-      expect(page).to have_content("Coupon Used:")
-      expect(page).to have_content(@coupon1.name)
-      expect(page).to have_content(@coupon1.code)
+      expect(page).to have_content("Subtotal Revenue: #{number_to_currency(invoice.total_revenue)}")
+      expect(page).to have_content("Grand Total Revenue: #{number_to_currency(invoice.rev_with_discount)}")
+      expect(page).to have_content("$900.00")
+      expect(page).to have_content("$890.00")
     end
   end
 end
