@@ -20,6 +20,16 @@ class Invoice < ApplicationRecord
     if coupon.present?
       discount = coupon_discount(subtotal)
       subtotal - discount
+    else
+      subtotal
+    end
+  end
+
+  def coupon_discount(subtotal)
+    if coupon.value_type == 'percent'
+      subtotal * (coupon.value / 100)
+    else
+      coupon.value
     end
   end
 end
