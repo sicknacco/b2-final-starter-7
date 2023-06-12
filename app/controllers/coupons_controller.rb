@@ -39,7 +39,8 @@ class CouponsController < ApplicationController
     @coupon = Coupon.find(params[:id])
 
     if @merchant.five_active_coupons?
-      flash[:alert] = "Limit 5 active coupons. Please deactivate one before creating another"
+      flash[:alert] = "Limit 5 active coupons. Please deactivate one before activating another"
+      redirect_to merchant_coupon_path(@merchant, @coupon)
     elsif
       @coupon.activated == true
       @coupon.update(activated: false)

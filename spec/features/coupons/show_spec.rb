@@ -47,7 +47,7 @@ RSpec.describe "Coupon's Show Page", type: :feature do
     it "has a button to deactivate a coupon" do
       test_data
       visit(merchant_coupon_path(@merchant1, @coupon1))
-# save_and_open_page
+
       expect(page).to have_content("Coupon Activated?: true")
       expect(page).to have_button("Deactivate #{@coupon1.name}")
 
@@ -70,6 +70,25 @@ RSpec.describe "Coupon's Show Page", type: :feature do
 
       expect(current_path).to eq(merchant_coupon_path(@merchant1, @coupon3))
       expect(page).to have_content("Coupon Activated?: true")
+    end
+  end
+  
+  describe "Sad path to prevent coupon activation if there are 5 active coupons" do
+    it "will flash a message when trying to activate a sixth coupon" do
+      @merchant1 = Merchant.create!(name: "Hair Care")
+      @coupon1 = @merchant1.coupons.create!(name: "$10 off", code: "OFF10", value: 10.00, value_type: 1, activated: true)
+      @coupon2 = @merchant1.coupons.create!(name: "10% off", code: "TAKE10PER", value: 0.10, value_type: 0, activated: true)
+      @coupon3 = @merchant1.coupons.create!(name: "Summer Sale", code: "SUMMER", value: 0.25, value_type: 0, activated: true)
+      @coupon4 = @merchant1.coupons.create!(name: "Spring Sale", code: "SPRING", value: 25.00, value_type: 1, activated: true)
+      @coupon5 = @merchant1.coupons.create!(name: "Number 5", code: "NUM5", value: 5.00, value_type: 1, activated: true)
+      @coupon6 = @merchant1.coupons.create!(name: "Golden Ticket", code: "GOLDEN", value: 50.00, value_type: 1, activated: false)
+      
+      visit(merchant_coupon_path(@merchant1, @coupon6))
+      click_button("Activate #{@coupon6.name}")
+      
+      expect(current_path).to eq(merchant_coupon_path(@merchant1, @coupon6))
+      expect(page).to have_button("Activate #{@coupon6.name}")
+      expect(page).to have_content("Limit 5 active coupons. Please deactivate one before activating another")
     end
   end
 end
