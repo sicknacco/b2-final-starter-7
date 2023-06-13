@@ -1,5 +1,3 @@
-require 'json'
-require 'httparty'
 require './app/poros/holiday.rb'
 require './app/services/holiday_service.rb'
 
