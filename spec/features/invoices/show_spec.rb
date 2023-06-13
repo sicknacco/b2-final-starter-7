@@ -109,11 +109,19 @@ RSpec.describe "invoices show" do
     end
   end
   
-  it "displays the 'grand total' with coupon discount" do
+  it "displays the 'grand total' with dollar coupon discount" do
     visit(merchant_invoice_path(@merchant1, @invoice_1))
     within "#coupon_area" do
       expect(page).to have_content("Grand Total:")
       expect(page).to have_content(@invoice_1.rev_with_discount)
+    end
+  end
+
+  it "displays the 'grand total' with percent coupon discount" do
+    visit(merchant_invoice_path(@merchant2, @invoice_3))
+    within "#coupon_area" do
+      expect(page).to have_content("Grand Total:")
+      expect(page).to have_content(@invoice_3.rev_with_discount)
     end
   end
   
