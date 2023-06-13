@@ -12,9 +12,8 @@ class Coupon < ApplicationRecord
   enum value_type: {"percent": 0, "dollar": 1}
 
   def times_used
-    invoices.joins(:transactions)
-            .where('result = 1', invoices: {coupon_id: self.id})
-            .distinct
-            .count
+    transactions.where('result = 1', invoices: {coupon_id: self.id})
+                .distinct
+                .count
   end
 end
