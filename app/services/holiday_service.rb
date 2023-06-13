@@ -3,7 +3,8 @@ require "httparty"
 class HolidayService
   def get_url(url)
     response = HTTParty.get(url)
-    JSON.parse(response.body, symbolize_names: true)
+    parsed = JSON.parse(response.body, symbolize_names: true)
+    parsed[0..2]
   end
 
   def holidays
